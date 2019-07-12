@@ -8,15 +8,15 @@ import pyconll
 
 from core.utils import to_xml_id
 
-POS_NOUN = 'NN'
-POS_DETERMINER = 'DT'
+POS_NOUN = 'NOUN'
+POS_DETERMINER = 'DET'
 FORMS_DETERMINER = ['a', 'an']
 
 
 def process_single(in_file, out_file):
     with open(out_file, 'w') as f:
         w = csv.writer(f)
-        # w.writerow(['chapter', 'found', 'from-to'])
+        w.writerow(['chapter', 'found', 'from-to'])
 
         sentences = pyconll.load_from_file(in_file)
 
@@ -27,7 +27,7 @@ def process_single(in_file, out_file):
             current_s = []
 
             for token in sentence:
-                if token.form in FORMS_DETERMINER and token.xpos == POS_DETERMINER:
+                if token.form in FORMS_DETERMINER and token.upos == POS_DETERMINER:
                     current_token_id = token.id
                     current_head = token.head
                     current_s = []
@@ -35,7 +35,7 @@ def process_single(in_file, out_file):
                 if current_head:
                     current_s.append(token.form)
 
-                current_head_filled = current_head and token.id == current_head and token.xpos == POS_NOUN
+                current_head_filled = current_head and token.id == current_head and token.upos == POS_NOUN
 
                 if current_head_filled:
                     results.append({'full': ' '.join(current_s),
@@ -46,10 +46,10 @@ def process_single(in_file, out_file):
                     current_s = []
 
             for result in results:
-                # w.writerow([os.path.basename(in_file),
-                #            result.get('full'),
-                #            '-t {} {}'.format(result.get('start'), result.get('end'))])
-                w.writerow(['-t {} {}'.format(result.get('start'), result.get('end'))])
+                w.writerow([os.path.basename(in_file),
+                            result.get('full'),
+                            '-t {} {}'.format(result.get('start'), result.get('end'))])
+                #w.writerow(['-t {} {}'.format(result.get('start'), result.get('end'))])
 
 
 @click.command()
