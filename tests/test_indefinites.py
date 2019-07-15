@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import os
 import unittest
 
 from indefinites.extract import process_single
+
 
 class TestIndefinites(unittest.TestCase):
     def test_extract(self):

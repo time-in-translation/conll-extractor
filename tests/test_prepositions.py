@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import os
 import unittest
 
 from prepositions.extract import process_single
+
 
 class TestPrepositions(unittest.TestCase):
     def test_extract(self):
@@ -10,7 +13,7 @@ class TestPrepositions(unittest.TestCase):
         cmp_file = os.path.join(os.getcwd(), data_dir, 'prepositions.csv')
         tmp_file = os.path.join(os.getcwd(), data_dir, 'tmp.csv')
 
-        process_single(in_file, tmp_file)
+        process_single(in_file, tmp_file, filter_prepositions=True)
 
         with open(tmp_file, 'r') as tmp:
             with open(cmp_file, 'r') as cmp:

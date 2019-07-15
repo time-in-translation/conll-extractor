@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
-import argparse
 import csv
 import os
 
+import click
 import pyconll
 
 from prepositions.data import PREPOSITIONS, DETERMINERS, FILTER_PREP
-from core.utils import to_xml_id
+from core.utils import to_xml_id, to_tokens, convert_filename
+
+POS_ARTICLE = 'ART'
+POS_NOUN = 'NN'
 
 
-def process_single(in_file, out_file, needs_determiner=True):
+def process_single(in_file, out_file, needs_determiner=True, filter_prepositions=False):
     with open(out_file, 'w') as f:
         w = csv.writer(f)
         w.writerow(['chapter', 'preposition', 'determiner', 'noun', 'extract'])
@@ -36,11 +39,11 @@ def process_single(in_file, out_file, needs_determiner=True):
 
                 if needs_determiner:
                     if current_head is not None and token.head == current_head \
-                            and token.xpos == 'ART' and token.form in DETERMINERS:
+                            and token.xpos == POS_ARTICLE and token.form in DETERMINERS:
                         current_det = token.form
 
                 current_det_filled = current_det is not None or not needs_determiner
-                current_head_filled = current_head is not None and token.id == current_head and token.xpos == 'NN'
+                current_head_filled = current_head is not None and token.id == current_head and token.xpos == POS_NOUN
 
                 if current_head_filled and current_det_filled:
                     results.append({'prep': current_token,
@@ -54,19 +57,33 @@ def process_single(in_file, out_file, needs_determiner=True):
                     current_token = None
 
             for result in results:
-                if result.get('prep') in FILTER_PREP and result.get('noun') in FILTER_PREP[result.get('prep')]:
+                preposition = result.get('prep')
+                determiner = result.get('det')
+                noun = result.get('noun')
+                start = result.get('start')
+                end = result.get('end')
+
+                if not filter_prepositions or check_filter(preposition, noun):
                     w.writerow([os.path.basename(in_file),
-                                result.get('prep'),
-                                result.get('det'),
-                                result.get('noun'),
-                                '-t {} {}'.format(result.get('start'), result.get('end'))])
+                                preposition,
+                                determiner,
+                                noun,
+                                to_tokens(end, start)])
+
+
+def check_filter(preposition, noun):
+    return preposition in FILTER_PREP and noun in FILTER_PREP[preposition]
+
+
+@click.command()
+@click.argument('files', nargs=-1, type=click.Path(exists=True))
+@click.option('--needs_determiner', is_flag=True)
+@click.option('--filter_prepositions', is_flag=True)
+def process_files(files, needs_determiner=False, filter_prepositions=False):
+    for in_file in files:
+        out_file = convert_filename(in_file)
+        process_single(in_file, out_file, needs_determiner=needs_determiner, filter_prepositions=filter_prepositions)
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('file_in', help='Input file')
-    parser.add_argument('file_out', help='Output file')
-    parser.add_argument('-d', '--needs_determiner', action='store_false', help='Do we need a determiner?')
-    args = parser.parse_args()
-
-    process_single(args.file_in, args.file_out, args.needs_determiner)
+    process_files()
