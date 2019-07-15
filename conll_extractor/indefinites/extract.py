@@ -6,7 +6,7 @@ import os
 import click
 import pyconll
 
-from core.utils import to_xml_id, to_tokens, convert_filename
+from ..core.utils import to_xml_id, to_tokens, convert_filename
 
 POS_NOUN = 'NOUN'
 POS_DETERMINER = 'DET'
@@ -50,15 +50,3 @@ def process_single(in_file, out_file):
                 start = result.get('start')
                 end = result.get('end')
                 w.writerow([os.path.basename(in_file), full, to_tokens(end, start)])
-
-
-@click.command()
-@click.argument('files', nargs=-1, type=click.Path(exists=True))
-def process_files(files):
-    for in_file in files:
-        out_file = convert_filename(in_file)
-        process_single(in_file, out_file)
-
-
-if __name__ == '__main__':
-    process_files()

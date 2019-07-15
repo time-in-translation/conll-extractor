@@ -6,8 +6,8 @@ import os
 import click
 import pyconll
 
-from prepositions.data import PREPOSITIONS, DETERMINERS, FILTER_PREP
-from core.utils import to_xml_id, to_tokens, convert_filename
+from .data import PREPOSITIONS, DETERMINERS, FILTER_PREP
+from ..core.utils import to_xml_id, to_tokens, convert_filename
 
 POS_ARTICLE = 'ART'
 POS_NOUN = 'NN'
@@ -73,17 +73,3 @@ def process_single(in_file, out_file, needs_determiner=True, filter_prepositions
 
 def check_filter(preposition, noun):
     return preposition in FILTER_PREP and noun in FILTER_PREP[preposition]
-
-
-@click.command()
-@click.argument('files', nargs=-1, type=click.Path(exists=True))
-@click.option('--needs_determiner', is_flag=True)
-@click.option('--filter_prepositions', is_flag=True)
-def process_files(files, needs_determiner=False, filter_prepositions=False):
-    for in_file in files:
-        out_file = convert_filename(in_file)
-        process_single(in_file, out_file, needs_determiner=needs_determiner, filter_prepositions=filter_prepositions)
-
-
-if __name__ == '__main__':
-    process_files()
