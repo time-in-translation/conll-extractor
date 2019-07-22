@@ -3,10 +3,9 @@
 import csv
 import os
 
-import click
 import pyconll
 
-from ..core.utils import to_xml_id, to_tokens, convert_filename
+from ..core.utils import to_xml_id, to_tokens
 
 POS_NOUN = 'NOUN'
 POS_DETERMINER = 'DET'

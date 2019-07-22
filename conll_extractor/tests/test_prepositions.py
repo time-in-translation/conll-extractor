@@ -13,7 +13,7 @@ class TestPrepositions(unittest.TestCase):
         cmp_file = os.path.join(os.getcwd(), data_dir, 'prepositions.csv')
         tmp_file = os.path.join(os.getcwd(), data_dir, 'tmp.csv')
 
-        process_single(in_file, tmp_file, filter_prepositions=True)
+        process_single(in_file, tmp_file, filter_pps=True)
 
         with open(tmp_file, 'r') as tmp:
             with open(cmp_file, 'r') as cmp:

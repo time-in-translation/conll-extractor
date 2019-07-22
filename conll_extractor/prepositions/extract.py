@@ -3,22 +3,23 @@
 import csv
 import os
 
-import click
 import pyconll
 
-from .data import PREPOSITIONS, DETERMINERS, FILTER_PREP
-from ..core.utils import to_xml_id, to_tokens, convert_filename
+from .data import CONTRACTED, FILTER_CONTRACTED, PREPOSITIONS, DETERMINERS, FILTER_PP
+from ..core.utils import to_xml_id, to_tokens
 
 POS_ARTICLE = 'ART'
 POS_NOUN = 'NN'
 
 
-def process_single(in_file, out_file, needs_determiner=True, filter_prepositions=False):
+def process_single(in_file, out_file, contracted=False, filter_pps=False):
     with open(out_file, 'w') as f:
         w = csv.writer(f)
         w.writerow(['chapter', 'preposition', 'determiner', 'noun', 'extract'])
 
         sentences = pyconll.load_from_file(in_file)
+        forms = CONTRACTED if contracted else PREPOSITIONS
+        needs_determiner = not contracted
 
         for sentence in sentences:
             s = []
@@ -31,8 +32,7 @@ def process_single(in_file, out_file, needs_determiner=True, filter_prepositions
             for token in sentence:
                 s.append(token.form)
 
-                if token.form in PREPOSITIONS:
-                    # if token.form in CONTRACTED:
+                if token.form in forms:
                     current_token = token.form
                     current_token_id = token.id
                     current_head = token.head
@@ -63,7 +63,7 @@ def process_single(in_file, out_file, needs_determiner=True, filter_prepositions
                 start = result.get('start')
                 end = result.get('end')
 
-                if not filter_prepositions or check_filter(preposition, noun):
+                if not filter_pps or check_filter(contracted, preposition, noun):
                     w.writerow([os.path.basename(in_file),
                                 preposition,
                                 determiner,
@@ -71,5 +71,6 @@ def process_single(in_file, out_file, needs_determiner=True, filter_prepositions
                                 to_tokens(end, start)])
 
 
-def check_filter(preposition, noun):
-    return preposition in FILTER_PREP and noun in FILTER_PREP[preposition]
+def check_filter(contracted, preposition, noun):
+    f = FILTER_CONTRACTED if contracted else FILTER_PP
+    return preposition in f and noun in f[preposition]
