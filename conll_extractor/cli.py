@@ -2,28 +2,27 @@
 
 import click
 
-from .indefinites.extract import process_single as process_indefinites
+from .noun_phrases.extract import process_single as process_noun_phrases
 from .prepositions.extract import process_single as process_prepositions
+from .core.constants import NOUN_PHRASES, PREPOSITIONS, DEFINITE, INDEFINITE
 from .core.utils import convert_filename
 
 
-# Extractor types
-INDEFINITES = 'indefinites'
-PREPOSITIONS = 'prepositions'
-
-
 @click.command()
-@click.argument('extractor', type=click.Choice([INDEFINITES, PREPOSITIONS]))
+@click.argument('extractor', type=click.Choice([NOUN_PHRASES, PREPOSITIONS]))
 @click.argument('files', nargs=-1, type=click.Path(exists=True))
+@click.option('--definiteness', type=click.Choice([DEFINITE, INDEFINITE]),
+              help='If set, limit the definiteness of noun phrases to definite or indefinite')
 @click.option('--contracted', is_flag=True,
               help='Whether to extract contracted (e.g. ins Auto) or uncontracted (e.g. in das Auto) PPs.')
 @click.option('--filter_pps', is_flag=True,
               help='Whether to filter the PPs based on a list of preposition-noun combinations.')
-def cli(extractor, files, contracted=False, filter_pps=False):
+def cli(extractor, files, definiteness=None, contracted=False, filter_pps=False):
     resulting_extractor = None
     kwargs = dict()
-    if extractor == INDEFINITES:
-        resulting_extractor = process_indefinites
+    if extractor == NOUN_PHRASES:
+        resulting_extractor = process_noun_phrases
+        kwargs['definiteness'] = definiteness
     elif extractor == PREPOSITIONS:
         resulting_extractor = process_prepositions
         kwargs['contracted'] = contracted

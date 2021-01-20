@@ -4,9 +4,9 @@ The scripts in this project allow to extract various forms of interest from file
 
 ## Available scripts
 
-### Indefinites
+### Noun phrases
 
-This script allows to extract noun phrases that start with an indefinite article (e.g. *a dog*, *an hour*).  
+This script allows to extract noun phrases that start with a definite (e.g. *the dog*, *the ongoing concern*) indefinite article (e.g. *a dog*, *an ongoing concern*).  
 
 ### Prepositions
 
@@ -24,29 +24,28 @@ Then, create the executable `conll-extract` via:
 
 ## Examples
 
-### Indefinites
+### Noun phrases
 
-The script to extract indefinites is straightforward:
+The script to extract noun phrases is straightforward and has one additional parameter (optionally) filter for definite or indefinite noun phrases:
 
-    $ conll-extract indefinites <filename>.conllu
+    $ conll-extract noun_phrases <filename>.conllu
     
-The extracted indefinites can be found in `<filename>.csv`. 
+    Options:
+      --definiteness [definite|indefinite]
+        If set, limit the definiteness of noun phrases to definite or indefinite
+
+The extracted noun phrases can be found in `<filename>.csv`. 
 
 ### Prepositions
 
-The script to extract prepositional phrases has some additional parameters:
-
-    $ conll-extract --help
-    
-    Usage: conll-extract [OPTIONS] [indefinites|prepositions] [FILES]...
-    
-    Options:
-      --contracted  Whether to extract contracted (e.g. ins Auto) or uncontracted
-                    (e.g. in das Auto) PPs
-      --filter_pps  Whether to filter the PPs based on a list of preposition-noun
-                    combinations
-      --help        Show this message and exit.
+The script to extract prepositional phrases has two additional parameters:
 
     $ conll-extract prepositions <filename>.conllu
+    
+    Options:
+      --contracted 
+        Whether to extract contracted (e.g. ins Auto) or uncontracted (e.g. in das Auto) PPs
+      --filter_pps
+        Whether to filter the PPs based on a list of preposition-noun combinations
     
 The extracted prepositional phrases can be found in `<filename>.csv`.

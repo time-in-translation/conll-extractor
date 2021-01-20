@@ -5,14 +5,23 @@ import os
 
 import pyconll
 
+from ..core.constants import DEFINITE, INDEFINITE
 from ..core.utils import to_xml_id, to_tokens
 
 POS_NOUN = 'NOUN'
 POS_DETERMINER = 'DET'
-FORMS_DETERMINER = ['a', 'an']
+LEMMATA_DEFINITE = ['the']
+LEMMATA_INDEFINITE = ['a', 'an']
 
 
-def process_single(in_file, out_file):
+def process_single(in_file, out_file, definiteness=None):
+    if definiteness == DEFINITE:
+        lemmata_determiner = LEMMATA_DEFINITE
+    elif definiteness == INDEFINITE:
+        lemmata_determiner = LEMMATA_INDEFINITE
+    else:
+        lemmata_determiner = LEMMATA_DEFINITE + LEMMATA_INDEFINITE
+
     with open(out_file, 'w') as f:
         w = csv.writer(f)
         w.writerow(['chapter', 'found', 'from-to'])
@@ -26,7 +35,7 @@ def process_single(in_file, out_file):
             current_s = []
 
             for token in sentence:
-                if token.form in FORMS_DETERMINER and token.upos == POS_DETERMINER:
+                if token.lemma in lemmata_determiner and token.upos == POS_DETERMINER:
                     current_token_id = token.id
                     current_head = token.head
                     current_s = []

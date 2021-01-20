@@ -1,4 +1,5 @@
 chapter,found,from-to
+en_partut-ud-test.conllu,A PARTICULAR PURPOSE,-t wn_partut-ud-46.52 wn_partut-ud-46.54
 en_partut-ud-test.conllu,a party,-t wn_partut-ud-64.5 wn_partut-ud-64.6
 en_partut-ud-test.conllu,an initiative,-t wn_partut-ud-80.8 wn_partut-ud-80.9
 en_partut-ud-test.conllu,a minimum,-t wn_partut-ud-227.19 wn_partut-ud-227.20
@@ -22,9 +23,14 @@ en_partut-ud-test.conllu,a transitional measure,-t wn_partut-ud-961.15 wn_partut
 en_partut-ud-test.conllu,a committee,-t wn_partut-ud-970.11 wn_partut-ud-970.12
 en_partut-ud-test.conllu,a means,-t wn_partut-ud-980.9 wn_partut-ud-980.10
 en_partut-ud-test.conllu,a disguised restriction,-t wn_partut-ud-980.15 wn_partut-ud-980.17
+en_partut-ud-test.conllu,A European law,-t wn_partut-ud-986.1 wn_partut-ud-986.3
 en_partut-ud-test.conllu,a period,-t wn_partut-ud-987.7 wn_partut-ud-987.8
+en_partut-ud-test.conllu,A national,-t wn_partut-ud-990.1 wn_partut-ud-990.2
+en_partut-ud-test.conllu,A national,-t wn_partut-ud-1001.1 wn_partut-ud-1001.2
 en_partut-ud-test.conllu,a term,-t wn_partut-ud-1001.23 wn_partut-ud-1001.24
 en_partut-ud-test.conllu,a temporary derogation,-t wn_partut-ud-1005.19 wn_partut-ud-1005.21
+en_partut-ud-test.conllu,A national base area,-t wn_partut-ud-1013.1 wn_partut-ud-1013.4
+en_partut-ud-test.conllu,A maximum guaranteed area,-t wn_partut-ud-1015.1 wn_partut-ud-1015.4
 en_partut-ud-test.conllu,a decision,-t wn_partut-ud-1016.3 wn_partut-ud-1016.4
 en_partut-ud-test.conllu,a marriage,-t wn_partut-ud-1194.10 wn_partut-ud-1194.11
 en_partut-ud-test.conllu,a weaker dollar,-t wn_partut-ud-1201.31 wn_partut-ud-1201.33
@@ -32,12 +38,14 @@ en_partut-ud-test.conllu,a few decades,-t wn_partut-ud-1212.16 wn_partut-ud-1212
 en_partut-ud-test.conllu,a mother,-t wn_partut-ud-1302.33 wn_partut-ud-1302.34
 en_partut-ud-test.conllu,a fundamental failing,-t wn_partut-ud-1304.3 wn_partut-ud-1304.5
 en_partut-ud-test.conllu,a great deal,-t wn_partut-ud-1392.26 wn_partut-ud-1392.28
+en_partut-ud-test.conllu,A package,-t wn_partut-ud-1411.1 wn_partut-ud-1411.2
 en_partut-ud-test.conllu,an inch,-t wn_partut-ud-1458.2 wn_partut-ud-1458.3
 en_partut-ud-test.conllu,a new threat,-t wn_partut-ud-1461.21 wn_partut-ud-1461.23
 en_partut-ud-test.conllu,"a "" peace offensive",-t wn_partut-ud-1461.29 wn_partut-ud-1461.32
 en_partut-ud-test.conllu,a genuine fiscal union,-t wn_partut-ud-1530.5 wn_partut-ud-1530.8
 en_partut-ud-test.conllu,a young boy,-t wn_partut-ud-1578.15 wn_partut-ud-1578.17
 en_partut-ud-test.conllu,an Oratorian grammar school,-t wn_partut-ud-1578.20 wn_partut-ud-1578.23
+en_partut-ud-test.conllu,A symbolic inheritance,-t wn_partut-ud-1650.1 wn_partut-ud-1650.3
 en_partut-ud-test.conllu,a light meal,-t wn_partut-ud-1683.7 wn_partut-ud-1683.9
 en_partut-ud-test.conllu,a hermit,-t wn_partut-ud-1691.7 wn_partut-ud-1691.8
 en_partut-ud-test.conllu,a vagrant,-t wn_partut-ud-1691.10 wn_partut-ud-1691.11
