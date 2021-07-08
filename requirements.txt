@@ -16,5 +16,5 @@ pyconll==2.3.3
     # via -r requirements.in
 requests==2.25.1
     # via pyconll
-urllib3==1.26.2
+urllib3==1.26.5
     # via requests
