@@ -4,7 +4,7 @@ import os
 import unittest
 
 from ..core.constants import DEFINITE, INDEFINITE
-from ..noun_phrases.extract import process_single
+from ..determiners.extract import process_single
 
 
 class TestDefinites(unittest.TestCase):

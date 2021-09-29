@@ -4,7 +4,7 @@ The scripts in this project allow to extract various forms of interest from file
 
 ## Available scripts
 
-### Noun phrases
+### Determiner phrases
 
 This script allows to extract noun phrases that start with a definite (e.g. *the dog*, *the ongoing concern*) indefinite article (e.g. *a dog*, *an ongoing concern*).  
 
@@ -24,17 +24,31 @@ Then, create the executable `conll-extract` via:
 
 ## Examples
 
-### Noun phrases
+### Determiner phrases
 
-The script to extract noun phrases is straightforward and has one additional parameter (optionally) filter for definite or indefinite noun phrases:
+The script to extract determiners and their accompanying nouns has one additional parameter (optionally) filter for definite or indefinite noun phrases:
 
-    $ conll-extract noun_phrases <filename>.conllu
+    $ conll-extract determiners <filename>.conllu
     
     Options:
       --definiteness [definite|indefinite]
         If set, limit the definiteness of noun phrases to definite or indefinite
 
-The extracted noun phrases can be found in `<filename>.csv`. 
+The extracted noun phrases can be found in `<filename>.csv`.
+
+### Nouns
+
+The script to extract noun phrases has two additional parameter (optionally) filter for a specific dependency relation or the number of the noun:
+
+    $ conll-extract nouns <filename>.conllu
+    
+    Options:
+      --deprel TEXT
+        If set, filter based on the dependency relation of the noun.
+      --number [Coll|Count|Dual|Grpa|Grpl|Inv|Pauc|Plur|Ptan|Sing|Tri]
+        If set, filter based on the number of the noun.
+
+The extracted noun phrases can be found in `<filename>.csv`.
 
 ### Prepositions
 
